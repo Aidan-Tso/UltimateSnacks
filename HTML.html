@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>Ultimate Snack Shop Menu</title>
+  </head>
+  <body>
+    <h1>Ultimate Snack Shop</h1>
+	<h2>Please choose your items</h2>
+	<h3>Your table is table 1</h3>
+    <form>
+	  Snacks:<br>
+	  <input type="checkbox" name="dessert" value="Jelly">Jelly ($2.50)<br>
+	  <input type="checkbox" name="dessert" value="Cake">Cake (One Slice) ($15.00)<br>
+	  <input type="checkbox" name="dessert" value="Cookies">Cookies (5 pcs) ($7.50)<br>
+	  <input type="checkbox" name="dessert" value="Ice-cream">Vanilla ice-cream (1 scoop) ($30.00)<br>
+	  <input type="submit" onclick="showResult()">
+	  <input type="reset">
+	  <button type="button" onclick="Help()">Ask for help!</button><br>
+	  <br>
+	  <script>
+	    var price = window.localStorage.getItem ('p1');
+		document.write ('You have spent: $' + price + '<br>');
+      </script>
+	</form>
+	<script>
+	  function Help() {
+	    window.localStorage.setItem ('h1', '1');
+		window.alert ('Help requested!');
+	  }
+	</script>
+	<script>
+	  function showResult() {
+        var jelly = window.localStorage.getItem ('Jelly1');
+		var cake = window.localStorage.getItem ('Cake1');
+		var cookies = window.localStorage.getItem ('Cookies1')
+		var ice = window.localStorage.getItem ('Ice1')
+		var result = [];
+		window.localStorage.setItem ('p1', ' ');
+		var fresult = [];
+		var old = window.localStorage.getItem ('t1');
+		window.localStorage.setItem ('t1', ' ');
+        var dessert = document.getElementsByName('dessert');
+        for (var i = 0; i < dessert.length; i++) {
+	      if (dessert[i].checked){
+	        result.push(dessert[i].value);
+			if (dessert[0].checked) {
+		      price = price - -2.50;
+		      jelly = jelly - -1; 
+		    }
+		    if (dessert[1].checked) {
+		      cake = cake - -1;
+		      price = price - -15.00;
+		    }
+		    if (dessert[2].checked) {
+		      price = price - -7.50;
+			  cookies = cookies - -1;
+		    }
+		    if (dessert[3].checked) {
+		      price = price - -30.00;
+			  ice = ice - -1;
+		    }  
+	      }
+	    }
+		fresult = result + ',' + old 
+		window.localStorage.setItem('Jelly1', jelly);
+		window.localStorage.setItem('Cake1', cake);
+		window.localStorage.setItem('Cookies1', cookies);
+		window.localStorage.setItem('Ice1', ice);
+        window.localStorage.setItem('t1', fresult);
+		window.localStorage.setItem('p1', price);
+		window.alert("Order Submitted! You ordered " + result);	
+	  }
+    </script>
+  </body>  
+</html>
